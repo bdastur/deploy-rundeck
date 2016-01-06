@@ -19,6 +19,9 @@ def parse_arguments():
     parser.add_argument("--inventory",
                         help="Ansible inventory file",
                         required=True)
+    parser.add_argument("--username",
+                        help="Username",
+                        required=True)
     parser.add_argument("--destination",
                         help="Path to the resource file",
                         required=True)
@@ -31,7 +34,7 @@ def parse_arguments():
     return args
 
 
-def generate_resources_yaml(hostlist, yamlfile):
+def generate_resources_yaml(hostlist, username, yamlfile):
     host_str = ""
     for hostobj in hostlist:
         if hostobj['group'] == "all":
@@ -41,7 +44,7 @@ def generate_resources_yaml(hostlist, yamlfile):
                 host + " \n" + \
                 "tags: " + hostobj['group'] + ",\n" + \
                 "osFamily: unix" + "\n" + \
-                "username: rundeck" + "\n" + \
+                "username: " + username + "\n" + \
                 "osArch: amd64" + "\n" + \
                 "osVersion: 3.10.0-229.20.1.el7.x86_64" + "\n" + \
                 "description: Rundeck node" + "\n" + \
@@ -65,7 +68,9 @@ def main():
     for host in hostlist:
         print "HOST: ", host
 
-    generate_resources_yaml(hostlist, args.destination)
+    generate_resources_yaml(hostlist, 
+                            args.username,
+                            args.destination)
 
 
 if __name__ == '__main__':
