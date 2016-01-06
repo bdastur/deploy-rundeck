@@ -42,15 +42,15 @@ def generate_resources_yaml(hostlist, username, yamlfile):
         for host in hostobj['hostlist']:
             host_str = host_str + \
                 host + " \n" + \
-                "tags: " + hostobj['group'] + ",\n" + \
-                "osFamily: unix" + "\n" + \
-                "username: " + username + "\n" + \
-                "osArch: amd64" + "\n" + \
-                "osVersion: 3.10.0-229.20.1.el7.x86_64" + "\n" + \
-                "description: Rundeck node" + "\n" + \
-                "nodename: " + host + "\n" + \
-                "hostname: " + host + "\n" + \
-                "osName: Linux" + "\n"
+                "  tags: " + hostobj['group'] + ",\n" + \
+                "  osFamily: unix" + "\n" + \
+                "  username: " + username + "\n" + \
+                "  osArch: amd64" + "\n" + \
+                "  osVersion: 3.10.0-229.20.1.el7.x86_64" + "\n" + \
+                "  description: Rundeck node" + "\n" + \
+                "  nodename: " + host + "\n" + \
+                "  hostname: " + host + "\n" + \
+                "  osName: Linux" + "\n"
 
     with open(yamlfile, 'w') as outfile:
         outfile.write(host_str)
