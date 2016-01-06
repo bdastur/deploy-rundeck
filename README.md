@@ -1,4 +1,4 @@
 # deploy-rundeck
 ----
 
-Deployment and operational tools for runeck
+Deployment and operational tools for rundeck
