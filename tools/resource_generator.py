@@ -41,8 +41,8 @@ def generate_resources_yaml(hostlist, username, yamlfile):
             continue
         for host in hostobj['hostlist']:
             host_str = host_str + \
-                host + " \n" + \
-                "  tags: " + hostobj['group'] + ",\n" + \
+                host + ":" + " \n" + \
+                "  tags: " + hostobj['group'] + "\n" + \
                 "  osFamily: unix" + "\n" + \
                 "  username: " + username + "\n" + \
                 "  osArch: amd64" + "\n" + \
