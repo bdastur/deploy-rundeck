@@ -45,8 +45,8 @@ def generate_ssh_proxyconfig(hostlist, username, destfile):
         for host in hostobj['hostlist']:
             proxycfg_str = proxycfg_str + "\n" + \
                 "Host " + host + "\n" + \
-                "  User " + username + ",\n" + \
-                "  Hostname" + host + "\n" + \
+                "  User " + username + "\n" + \
+                "  Hostname " + host + "\n" + \
                 "  Port 22" + "\n" + \
                 "  ProxyCommand ssh -q -W %h:%p " + JUMPHOST + "\n" 
 

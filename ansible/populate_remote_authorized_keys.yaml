@@ -1,5 +1,13 @@
+# Playbook: To populate ssh public keys on remote hosts.
+# How to run it:
+# > ansible-playbook -i ../../cloud_inventory/phx2_inventory \
+# -e "hosts=nova username=foobar_barbar public_key=/home/foobar_barbar/.ssh/id_rsa.pub" \
+# populate_remote_authorized_keys.yaml \
+# --ask-pass
+
 - name: "Playbook to copy local public key to remote authorized keys"
   hosts: "{{ hosts }}" 
+  user: "{{ username }}"
   tasks:
     - name: "ping hosts"
       ping:
@@ -8,7 +16,14 @@
         path: "~/.ssh"
         state: directory
         mode: "0755"
-    - name: "Copy public keys to remote host authorized keys"
+    - name: "Copy public keys to remote host in temporary file"
       copy:
         src: "{{ public_key }}"
-        dest: "/home/{{ username }}/.ssh/authorized_keys"
+        dest: "/tmp/keyfile"
+    - name: "Copy the temp file to authorized keys"
+      shell: cat /tmp/keyfile >> /home/{{ username }}/.ssh/authorized_keys
+    - name: Delete the temporary file
+      file: 
+        path: /tmp/keyfile
+        state: absent
+
