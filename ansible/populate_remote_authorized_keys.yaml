@@ -1,7 +1,7 @@
 # Playbook: To populate ssh public keys on remote hosts.
 # How to run it:
-# > ansible-playbook -i ../../cloud_inventory/phx2_inventory \
-# -e "hosts=nova username=foobar_barbar public_key=/home/foobar_barbar/.ssh/id_rsa.pub" \
+# > ansible-playbook -i <path to inventory file> \
+# -e "hosts=<hostname or group of hosts> username=<username> public_key=<path ot public ssh key>" \
 # populate_remote_authorized_keys.yaml \
 # --ask-pass
 
